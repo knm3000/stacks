@@ -11,7 +11,7 @@ RUN bash /tmp/build/configure-core-dump-directory.sh
 RUN bash /tmp/build/configure-firstboot.sh
 
 # create the vcap for garden and warden
-RUN useradd -mU -s /bin/bash vcap
+RUN useradd -mU -u 1003 -s /bin/bash vcap
 RUN mkdir /home/vcap/app
 RUN chown vcap /home/vcap/app
 RUN ln -s /home/vcap/app /app
