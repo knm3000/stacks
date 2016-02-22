@@ -30,7 +30,7 @@ The generation and release of a new rootfs happens on the [stacks](https://build
 
 * A new stack is generated with `make`.
 
-* The generated tarball is deployed with the [runtime-passed branch](https://github.com/cloudfoundry/cf-release/tree/runtime-passed) of BOSH cf-release.
+* The generated tarball is deployed with the [develop](https://github.com/cloudfoundry/cf-release/tree/develop) of BOSH cf-release.
 
 	```shell
 	mv stacks/cflinuxfs2.tar.gz cf-release/blobs/rootfs/cflinuxfs2.tar.gz
@@ -39,7 +39,7 @@ The generation and release of a new rootfs happens on the [stacks](https://build
 	bosh -n upload release
 	bosh -n deploy
 	```
-	
+
 * The [cf-acceptance-tests](https://github.com/cloudfoundry/cf-acceptance-tests) of that cf-release are then run against that deployment.
 
 	```shell
@@ -50,3 +50,15 @@ The generation and release of a new rootfs happens on the [stacks](https://build
 	```
 
 * Once all tests pass, the rootfs tarball can be found as a [Github Release](https://github.com/cloudfoundry/stacks/releases) and a [Docker Image](https://registry.hub.docker.com/u/cloudfoundry/cflinuxfs2/).
+
+# Testing the mariadb docker image
+
+The stack is available through [docker hub](https://registry.hub.docker.com/u/cloudfoundry/cflinuxfs2/). It can be pulled down locally to be developed against.
+
+The following provides a `bash` shell where you can test and compile your app dependencies against.
+
+```shell
+cd your-app/
+docker pull cloudfoundry/cflinuxfs2:mariadb
+docker run -it -v `pwd`:/app cloudfoundry/cflinuxfs2:mariadb bash
+```
